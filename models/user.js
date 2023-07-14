@@ -12,8 +12,9 @@ const orderSchema = new Schema({
         required: true
     }, 
     rating: {
-        type: Number,
-        enum: [1, 2, 3, 4, 5]
+        type: Schema.Types.Mixed,
+        enum: [undefined, 1, 2, 3, 4, 5],
+        required: true
     }
 })
 
