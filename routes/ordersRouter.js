@@ -3,7 +3,7 @@ const ordersRouter = express.Router();
 const FoodItem = require('../models/item.js');
 const User = require('../models/user');
 
-ordersRouter.route('/:userID')
+ordersRouter.route('/user/:userID')
     .get((req, res, next) => { // get all orders corresponding to a user
         User.findOne(
             { _id: req.params.userID },
@@ -39,6 +39,18 @@ ordersRouter.route('/:userID')
                     return res.status(201).send(updatedUser);
                 }
             )
+        })
+    })
+
+ordersRouter.route('/order/:orderID')
+    .get((req, res, next) => { // get order by its order ID
+        User.$where(`this.orders.findIndex(order => order._id === ${req.params.orderID}) !== -1`).exec((err, nestedUser) => {
+            if (err) {
+                res.status(500)
+                return next(err);
+            }
+            const relevantOrder = nestedUser.orders.find(order => order._id === req.params.orderID);
+            return res.status(200).send(relevantOrder);
         })
     })
 

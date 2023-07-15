@@ -82,7 +82,6 @@ itemsRouter.route('/:itemID')
                 }
                 return res.status(201).send(updatedFoodItem);
             }
-
         )
     })
 
