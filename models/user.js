@@ -16,7 +16,7 @@ const lightweightOrderedItemSchema = new Schema({
         enum: [null, 1, 2, 3, 4, 5],
         required: true
     }
-})
+}, { _id: false })
 
 const orderSchema = new Schema({
     items: {

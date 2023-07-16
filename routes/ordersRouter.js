@@ -15,19 +15,14 @@ ordersRouter.route('/user/:userID')
     .post((req, res, next) => { // post a new order to a user consisting of the user's current cart
         FoodItem.find({ 'users.userID': req.params.userID })
             .then(userCart => {
-                const blah = userCart.map(item => ({
+                const formattedCart = userCart.map(item => ({
                     itemID: item._id,
                     quantity: item.users.find(user => user.userID == req.params.userID).quantity,
                     rating: null
                 }));
-                console.log(blah)
                 User.findOneAndUpdate(
                     { _id: req.params.userID },
-                    { $push: { orders: userCart.map(item => ({
-                        itemID: item._id,
-                        quantity: item.users.find(user => user.userID == req.params.userID).quantity,
-                        rating: null
-                    })) } },
+                    { $push: { orders: { items: formattedCart } } },
                     { new: true }
                 )
                     .then(updatedUser => res.status(201).send(updatedUser))
@@ -44,14 +39,15 @@ ordersRouter.route('/user/:userID')
 
 ordersRouter.route('/order/:orderID')
     .get((req, res, next) => { // get order by its order ID
-        User.$where(`this.orders.findIndex(order => order._id === ${req.params.orderID}) !== -1`).exec((err, nestedUser) => {
-            if (err) {
+        User.findOne({ 'orders._id': req.params.orderID })
+            .then(foundUser => {
+                const order = foundUser.orders.find(order => order._id == req.params.orderID);
+                return res.status(200).send(order);
+            })
+            .catch(err => {
                 res.status(500)
                 return next(err);
-            }
-            const relevantOrder = nestedUser.orders.find(order => order._id === req.params.orderID);
-            return res.status(200).send(relevantOrder);
-        })
+            })
     })
 
 module.exports = ordersRouter;
