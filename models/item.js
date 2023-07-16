@@ -13,7 +13,7 @@ const lightweightUserSchema = new Schema({
         type: Number,
         required: true
     }
-})
+}, { _id: false })
 
 // item schema
 const itemSchema = new Schema({
@@ -23,6 +23,10 @@ const itemSchema = new Schema({
     },
     price: {
         type: Number,
+        required: true
+    },
+    imgUrl: {
+        type: String,
         required: true
     },
     category: {
