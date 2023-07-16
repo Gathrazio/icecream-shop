@@ -13,7 +13,7 @@ const lightweightUserSchema = new Schema({
         type: Number,
         required: true
     }
-})
+}, { _id: false })
 
 // item schema
 const itemSchema = new Schema({

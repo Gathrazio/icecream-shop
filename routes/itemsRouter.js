@@ -47,10 +47,9 @@ itemsRouter.route('/:itemID')
             })
     })
     .get((req, res, next) => { // get one food item by its ID
-        FoodItem.findOne( { _id: req.params.itemID })
-            .then(item => {
-                return res.status(200).send(item);
-            })
+        console.log(req.params)
+        FoodItem.findOne({ _id: req.params.itemID })
+            .then(item => res.status(200).send(item))
             .catch(err => {
                 res.status(500)
                 return next(err);

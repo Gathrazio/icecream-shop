@@ -13,7 +13,7 @@ const lightweightOrderedItemSchema = new Schema({
     }, 
     rating: {
         type: Schema.Types.Mixed,
-        enum: [undefined, 1, 2, 3, 4, 5],
+        enum: [null, 1, 2, 3, 4, 5],
         required: true
     }
 })
