@@ -25,6 +25,10 @@ const itemSchema = new Schema({
         type: Number,
         required: true
     },
+    imgUrl: {
+        type: String,
+        required: true
+    },
     category: {
         type: String,
         enum: ['icecream', 'shakes', 'sandwiches'],
