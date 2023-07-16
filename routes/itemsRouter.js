@@ -31,6 +31,22 @@ itemsRouter.route('/category/:category')
             })
     })
 
+itemsRouter.route('/category/:category/search') // ex, /api/items/cateogry/icecream/search?title=vanilla
+    .get((req, res, next) => { // get all food items from a category that contain the characters in the title query
+        const { title } = req.query;
+        console.log(title)
+        const pattern = new RegExp(title);
+        FoodItem.find({
+            category: req.params.category,
+            title: { $regex: pattern, $options: 'i' }
+        })
+        .then(filteredItems => res.status(200).send(filteredItems))
+        .catch(err => {
+            res.status(500)
+            return next(err);
+        })
+    })
+
 itemsRouter.route('/:itemID')
     .delete((req, res, next) => { // delete one food item by its ID
         FoodItem.findOneAndDelete({ _id: req.params.itemID })
