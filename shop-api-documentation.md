@@ -8,7 +8,7 @@ This shop API allows the frontend app to make various database queries, includin
 There are two collections this API deals with: a users collection (a collection of users of the app) and a food items collection (a collection of all of the food items the shop sells).
 <p>&nbsp;</p>
 
-## User
+## Users
 
 A `user` document contains a `firstName`, `lastName`, `username`, `password`, and an `orders` property. The `orders` property is an array containing sub-documents which are `order` objects. Each `order` sub-document has an `items` property which is itself an array of ordered items sub-sub-documents. Each `orderedItem` is itself an object with properties being `itemID`, `quantity`, and `rating`. Note that the ordered items sub-sub-documents do not have an `_id` property, but the `order` sub-document does. This is because an `orderedItem` already contains an id (namely `itemID`) which is transfered from the `_id` property of an `item` document of the items collection, but each new `order` requires a new ID to be generated. The schemas of the `user` document, the `order` sub-document, and the `orderedItem` sub-sub-document are below.
 
@@ -110,7 +110,7 @@ An example user document is also below:
 ```
 <p>&nbsp;</p>
 
-## Item
+## Items
 
 An `item` document contains a `title`, `price`, `imgUrl`, `category`, and a `users` property. The `users` property is an array containing sub-documents which are `lightweightUser` objects. The purpose of the `users` property in each `item` document is explained in the Cart section of this markdown. The schemas of the `item` document as well as the `lightweightUser` document are below:
 
