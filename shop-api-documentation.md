@@ -357,3 +357,11 @@ There are four main base URLs that this API routes, namely `/api/items`, `/api/c
 - Endpoint: `/api/users/<userID>`
     - Method: DELETE
     - Description: Deletes a user by their ID.
+
+<p>&nbsp;</p>
+
+#### `/api/ratings`
+
+- Endpoint: `/api/ratings/recalculate/<itemID>`
+    - Method: POST
+    - Description: Recalculates the `globalRating` property of an item by its ID.
