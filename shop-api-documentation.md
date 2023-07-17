@@ -363,5 +363,6 @@ There are four main base URLs that this API routes, namely `/api/items`, `/api/c
 #### `/api/ratings`
 
 - Endpoint: `/api/ratings/recalculate/<itemID>`
+
     - Method: POST
     - Description: Recalculates the `globalRating` property of an item by its ID.
