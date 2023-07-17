@@ -275,39 +275,39 @@ There are four main base URLs that this API routes, namely `/api/items`, `/api/c
 
 
 
-*Endpoint: `/api/items/`
-    *Method: GET
-    *Description: Retrieves an array consisting of every item in the items collection.
+-Endpoint: `/api/items/`
+    -Method: GET
+    -Description: Retrieves an array consisting of every item in the items collection.
 
 
-*Endpoint: `/api/items/`
-    *Method: POST
-    *Description: Posts a new food item. Must send a JSON body that satisfies the item schema.
+-Endpoint: `/api/items/`
+    -Method: POST
+    -Description: Posts a new food item. Must send a JSON body that satisfies the item schema.
 
 
-*Endpoint: `/api/items/category/<someCategory>`
-    *Method: GET
-    *Description: Retrieves an array of all items from category `<someCategory>`. `<someCategory>` must be one of the following three strings: 'icecream', 'shakes', or 'sandwiches'.
+-Endpoint: `/api/items/category/<someCategory>`
+    -Method: GET
+    -Description: Retrieves an array of all items from category `<someCategory>`. `<someCategory>` must be one of the following three strings: 'icecream', 'shakes', or 'sandwiches'.
 
 
-*Endpoint: `/api/items/category/<someCategory>/search?title=<someLetters>`
-    *Method: GET
-    *Description: Retrieves an array of all items from category `<someCategory>` that have `title` properties which contain each letter within `<someLetters>`. This is a basic regex search.
+-Endpoint: `/api/items/category/<someCategory>/search?title=<someLetters>`
+    -Method: GET
+    -Description: Retrieves an array of all items from category `<someCategory>` that have `title` properties which contain each letter within `<someLetters>`. This is a basic regex search.
 
 
-*Endpoint: `/api/items/<itemID>`
-    *Method: GET
-    *Description: Retrieves a specific item document by its `_id` property.
+-Endpoint: `/api/items/<itemID>`
+    -Method: GET
+    -Description: Retrieves a specific item document by its `_id` property.
 
 
-*Endpoint: `/api/items/<itemID>`
-    *Method: PUT
-    *Description: Updates a specific item document by its `_id` property. Must send an update object in JSON. Properties in the update object that are not in the item schema will be ignored.
+-Endpoint: `/api/items/<itemID>`
+    -Method: PUT
+    -Description: Updates a specific item document by its `_id` property. Must send an update object in JSON. Properties in the update object that are not in the item schema will be ignored.
 
 
-*Endpoint: `/api/items/<itemID>`
-    *Method: DELETE
-    *Description: Deletes a specific item document by its `_id` property.
+-Endpoint: `/api/items/<itemID>`
+    -Method: DELETE
+    -Description: Deletes a specific item document by its `_id` property.
 
 
 
@@ -316,46 +316,46 @@ There are four main base URLs that this API routes, namely `/api/items`, `/api/c
 
 
 
-*Endpoint: `/api/cart/<userID>`
-    *Method: GET
-    *Description: Retrieves an array of unique items in the cart of a user by their ID.
+-Endpoint: `/api/cart/<userID>`
+    -Method: GET
+    -Description: Retrieves an array of unique items in the cart of a user by their ID.
 
 
 `/api/orders`  
 
 
-*Endpoint: `/api/orders/user/<userID>`
-    *Method: GET
-    *Description: Retrieves an array of all orders of a specific user by their ID.
+-Endpoint: `/api/orders/user/<userID>`
+    -Method: GET
+    -Description: Retrieves an array of all orders of a specific user by their ID.
 
 
-*Endpoint `/api/orders/user/<userID>`
-    *Method: POST
-    *Description: Posts a new order consisting of the user's current cart into their user document and clears the user's cart of items. Returns a statement of completion when successful. This is the most complex route of the API.
+-Endpoint `/api/orders/user/<userID>`
+    -Method: POST
+    -Description: Posts a new order consisting of the user's current cart into their user document and clears the user's cart of items. Returns a statement of completion when successful. This is the most complex route of the API.
 
 
-*Endpoint: `/api/order/<orderID>`
-    *Method: GET
-    *Description: Retrieves an order by its ID.
+-Endpoint: `/api/order/<orderID>`
+    -Method: GET
+    -Description: Retrieves an order by its ID.
 
 
 
 `/api/users`  
 
 
-*Endpoint: `/api/users/`
-    *Method: GET
-    *Description: Retrieves an array of every user in the users collection.
+-Endpoint: `/api/users/`
+    -Method: GET
+    -Description: Retrieves an array of every user in the users collection.
 
 
-*Endpoint: `/api/users/`
-    *Method: POST
-    *Description: Posts a new user into the users collection. Must send a JSON body in the request of an object that satisfies the user schema.
+-Endpoint: `/api/users/`
+    -Method: POST
+    -Description: Posts a new user into the users collection. Must send a JSON body in the request of an object that satisfies the user schema.
 
 
-*Endpoint: `/api/users/<userID>`
-    *Method: GET
-    *Description: Retrieves a specific user by their ID.
+-Endpoint: `/api/users/<userID>`
+    -Method: GET
+    -Description: Retrieves a specific user by their ID.
 
 
 
