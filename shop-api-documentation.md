@@ -270,7 +270,9 @@ There are four main base URLs that this API routes, namely `/api/items`, `/api/c
 
 
 <p>&nbsp;</p>
-`/api/items`
+
+### `/api/items`
+
 <p>&nbsp;</p>
 
 
@@ -312,7 +314,9 @@ There are four main base URLs that this API routes, namely `/api/items`, `/api/c
 
 
 <p>&nbsp;</p>
-`/api/cart`  
+
+### `/api/cart`  
+
 <p>&nbsp;</p>
 
 
@@ -321,7 +325,9 @@ There are four main base URLs that this API routes, namely `/api/items`, `/api/c
     - Description: Retrieves an array of unique items in the cart of a user by their ID.  
 
 <p>&nbsp;</p>
-`/api/orders`  
+
+### `/api/orders`  
+
 <p>&nbsp;</p>
 
 - Endpoint: `/api/orders/user/<userID>`
@@ -338,9 +344,10 @@ There are four main base URLs that this API routes, namely `/api/items`, `/api/c
     - Method: GET
     - Description: Retrieves an order by its ID.
 
-
 <p>&nbsp;</p>
-`/api/users`  
+
+### `/api/users`
+
 <p>&nbsp;</p>
 
 - Endpoint: `/api/users/`
