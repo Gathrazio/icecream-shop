@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-const lightweightOrderedItemSchema = new Schema({
+const orderedItemSchema = new Schema({
     itemID: {
         type: Schema.Types.ObjectId,
         ref: "User",
@@ -20,7 +20,7 @@ const lightweightOrderedItemSchema = new Schema({
 
 const orderSchema = new Schema({
     items: {
-       type: [lightweightOrderedItemSchema],
+       type: [orderedItemSchema],
        required: true
     }
 })
