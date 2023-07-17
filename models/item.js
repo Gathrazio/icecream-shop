@@ -36,7 +36,8 @@ const itemSchema = new Schema({
     },
     globalRating: {
         type: Number,
-        enum: [null, 1, 2, 3, 4, 5]
+        enum: [null, 1, 2, 3, 4, 5],
+        required: true
     },
     users: {
         type: [lightweightUserSchema],
