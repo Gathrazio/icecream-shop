@@ -112,7 +112,7 @@ An example user document is also below:
 
 ## Items
 
-An `item` document contains a `title`, `price`, `imgUrl`, `category`, and a `users` property. The `users` property is an array containing sub-documents which are `lightweightUser` objects. The purpose of the `users` property in each `item` document is explained in the Cart section of this markdown. The schemas of the `item` document as well as the `lightweightUser` document are below:
+An `item` document contains a `title`, `price`, `imgUrl`, `category`, `globalRating`, and a `users` property. The `users` property is an array containing sub-documents which are `lightweightUser` objects. The purpose of the `users` property in each `item` document is explained in the Cart section of this markdown. The schemas of the `item` document as well as the `lightweightUser` document are below:
 
 ```js
     const lightweightUserSchema = new Schema({
@@ -145,6 +145,10 @@ An `item` document contains a `title`, `price`, `imgUrl`, `category`, and a `use
             enum: ['icecream', 'shakes', 'sandwiches'],
             required: true
         },
+        globalRating: {
+            type: Number,
+            enum: [null, 1, 2, 3, 4, 5]
+        },
         users: {
             type: [lightweightUserSchema],
             required: true
@@ -161,6 +165,7 @@ An example item document is below:
         "price": 16.99,
         "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Spicy_italian_sausage_sub_%28Disney%27s_Hollywood_Studios%29_May_2023.jpg/640px-Spicy_italian_sausage_sub_%28Disney%27s_Hollywood_Studios%29_May_2023.jpg",
         "category": "sandwiches",
+        "globalRating": 4,
         "users": [
             {
                 "userID": "64b345092f4f5a5d7097fb93",

@@ -34,6 +34,10 @@ const itemSchema = new Schema({
         enum: ['icecream', 'shakes', 'sandwiches'],
         required: true
     },
+    globalRating: {
+        type: Number,
+        enum: [null, 1, 2, 3, 4, 5]
+    },
     users: {
         type: [lightweightUserSchema],
         required: true
