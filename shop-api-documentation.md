@@ -133,7 +133,6 @@ An `item` document contains a `title`, `price`, `imgUrl`, `category`, and a `use
         }
     }, { _id: false })
 
-    // item schema
     const itemSchema = new Schema({
         title: {
             type: String,
