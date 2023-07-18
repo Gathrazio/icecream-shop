@@ -10,7 +10,7 @@ There are two collections this API deals with: a users collection (a collection 
 
 ## Users
 
-A `user` document contains a `firstName`, `lastName`, `username`, `password`, and an `orders` property. The `orders` property is an array containing sub-documents which are `order` objects. Each `order` sub-document has an `items` property which is itself an array of ordered items sub-sub-documents. Each `orderedItem` is itself an object with properties being `itemID`, `quantity`, and `rating`. Note that the ordered items sub-sub-documents do not have an `_id` property, but the `order` sub-document does. This is because an `orderedItem` already contains an id (namely `itemID`) which is transfered from the `_id` property of an `item` document of the items collection, but each new `order` requires a new ID to be generated. The schemas of the `user` document, the `order` sub-document, and the `orderedItem` sub-sub-document are below.
+A `user` document contains a `firstName`, `lastName`, `username`, `password`, and an `orders` property. The `orders` property is an array containing sub-documents which are `order` objects. Each `order` sub-document has an `items` property which is itself an array of `orderedItem` sub-sub-documents. Each `orderedItem` is itself an object with properties `itemID`, `quantity`, and `rating`. Note that the `orderedItem` sub-sub-documents do not have an `_id` property, but the `order` sub-document does. This is because an `orderedItem` already contains an id (namely `itemID`) which is transfered from the `_id` property of an `item` document of the items collection, but each new `order` requires a new ID to be generated. The schemas of the `user` document, the `order` sub-document, and the `orderedItem` sub-sub-document are below.
 
 ```js
     const orderedItemSchema = new Schema({
@@ -361,6 +361,11 @@ There are five main base URLs that this API routes, namely `/api/items`, `/api/c
 <p>&nbsp;</p>
 
 #### `/api/ratings`
+
+- Endpoint: `/api/ratings/rate/<itemID>/<userID>?index=<someOrderIndex>&rating=<someRating>`
+
+    - Method: PUT
+    - Description: Updates a user's rating of a particular item in one of their orders. The `index` query `<someOrderIndex>` refers to the index of the relevant order in the user's `orders` array, and the `rating` query `<someRating>` is the desired rating the item is to be updated with. `<someRating>` should be one of the integers `1` through `5` or the integer `0`. The integer `0` corresponds to the item being unrated, and will update the item with a rating of `null`.
 
 - Endpoint: `/api/ratings/recalculate/<itemID>`
 
