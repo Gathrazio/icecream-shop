@@ -4,8 +4,43 @@ const FoodItem = require('../models/item.js');
 const User = require('../models/user');
 
 ratingsRouter.route('/recalculate/:itemID')
-    .put((req, res, next) => { // recalculate the global rating of an item by its ID
-        // todo
+    .get((req, res, next) => { // recalculates the global rating of an item by its ID and returns the new global rating
+        User.find()
+            .then(users => {
+                let totalRating = 0;
+                let ratingTally = 0;
+                for (i = 0; i < users.length; i++) {
+                    for (j = 0; j < users[i].orders.length; j++) {
+                        for (k = 0; k < users[i].orders[j].items.length; k++) {
+                            if (users[i].orders[j].items[k].rating && users[i].orders[j].items[k].itemID.valueOf() === req.params.itemID) {
+                                totalRating += users[i].orders[j].items[k].rating;
+                                ratingTally += 1;
+                            }
+                        }
+                    }
+                }
+                return res.status(200).send(JSON.stringify({
+                    globalRating: Math.round(totalRating / ratingTally)
+                }))
+            })
+            .catch(err => {
+                res.status(500)
+                return next(new Error("Failed to obtain the collection of users."))
+            })
+    })
+
+ratingsRouter.route('/update/:itemID')
+    .put((req, res ,next) => { // updates the global rating of an item to whatever the 'global' query is
+        FoodItem.findOneAndUpdate(
+            { _id: req.params.itemID },
+            { globalRating: Number(req.query.global) === 0 ? null : Number(req.query.global)},
+            { new: true }
+        )
+        .then(updatedItem => res.status(201).send(updatedItem))
+        .catch(err => {
+            res.status(500)
+            return next(new Error("Failed to update the item with a new global rating."))
+        })
     })
 
 ratingsRouter.route('/rate/:itemID/:userID/')
