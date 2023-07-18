@@ -1,4 +1,5 @@
 import { CartContextProvider } from '../cartContext.jsx'
+import { UserContextProvider } from './userContext.jsx'
 import Cart from './Cart'
 
 export default function NavPage (props) {
@@ -8,9 +9,12 @@ export default function NavPage (props) {
                 <button className="signin-button">Sign Out</button>
                 <div className="cart-wrapper">
                     <h3>Someone's Cart</h3>
-                    <CartContextProvider>
-                        <Cart />
-                    </CartContextProvider>
+                    <UserContextProvider>
+                        <CartContextProvider>
+                            <Cart />
+                        </CartContextProvider>
+                    </UserContextProvider>
+                    
                 </div>
             </div>
             <div className="central-content">{props.children}</div>

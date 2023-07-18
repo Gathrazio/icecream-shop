@@ -1,15 +1,19 @@
-import React, { useState, useEffect, createContext } from "react"
+import React, { useState, useEffect, createContext, useContext } from "react"
+import { UserContext } from "./components/userContext.jsx"
 
 const CartContext = createContext()
 
 function CartContextProvider(props){
 
     const [userCart, setUserCart] = useState([]);
+    const { _id } = useContext(UserContext);
 
     useEffect(() => {
-        axios.get('/api/cart/64b3455f2f4f5a5d7097fb95')
-            .then(res => setUserCart(res.data))
-    }, [])
+        if(_id) {
+            axios.get(`/api/cart/${_id}`)
+                .then(res => setUserCart(res.data))
+        }
+    }, [_id])
     
     return(
         <CartContext.Provider value={{ userCart }}>

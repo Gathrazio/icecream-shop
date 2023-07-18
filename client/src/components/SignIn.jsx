@@ -59,7 +59,7 @@ export default function SignIn () {
             .then(res => res.data.find(user => user.username === signInInfo.username && user.password === signInInfo.password))
             .then(user => {
                 if (user) {
-                    setVerifiedUserInfo(user)
+                    designateVUI(user)
                     Swal.fire({
                         icon: "success",
                         title: "Successfully logged in!",
