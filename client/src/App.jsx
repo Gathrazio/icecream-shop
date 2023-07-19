@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react'
-import { UserContextProvider } from './components/userContext.jsx'
 import SignIn from './components/SignIn'
 import Titlebar from './components/Titlebar'
 import Footer from './components/Footer'
 import NavPage from './components/NavPage'
+import Categories from './components/Categories'
 import './App.css'
 
 
@@ -23,7 +23,7 @@ export default function App() {
             />
             <Route 
                 path="/navigation/:userID"
-                element={<NavPage />}
+                element={<NavPage><Categories /></NavPage>}
             />
           </Routes>
         </div>

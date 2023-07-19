@@ -24,7 +24,6 @@ export default function NavPage (props) {
                 .then(res => setCurrentUser(res.data))
             axios.get(`/api/cart/${userID}`)
                 .then(res => setCurrentUserCart(res.data))
-                console.log("here!!")
         }, [])
 
     function reloadUserCart () {
@@ -55,7 +54,7 @@ export default function NavPage (props) {
                 </div>
                 
             </div>
-            <div className="central-content content-bearing">{props.children}</div>
+            <div className="central-content">{props.children}</div>
         </div>
     )
 }
