@@ -10,13 +10,13 @@ export default function NavPage (props) {
     
     const navigate2 = useNavigate();
     
-    const { verifiedUserInfo, userCart } = useContext(UserContext);
+    const { verifiedUserInfo, userCart, reloadTrigger } = useContext(UserContext);
     const [currentUser, setCurrentUser] = useState(verifiedUserInfo);
     const [currentUserCart, setCurrentUserCart] = useState(userCart)
 
     function popItem (itemID) {
-        const cartIndex = props.currentUserCart.findIndex(item => item._id === itemID)
-        setcurrentUserCart(prev => prev.toSpliced(cartIndex, 1))
+        const cartIndex = currentUserCart.findIndex(item => item._id === itemID)
+        setCurrentUserCart(prev => prev.toSpliced(cartIndex, 1))
     }
 
     useEffect(() => {
@@ -24,7 +24,7 @@ export default function NavPage (props) {
                 .then(res => setCurrentUser(res.data))
             axios.get(`/api/cart/${userID}`)
                 .then(res => setCurrentUserCart(res.data))
-        }, [])
+        }, [reloadTrigger])
 
     function reloadUserCart () {
         axios.get(`/api/cart/${userID}`)

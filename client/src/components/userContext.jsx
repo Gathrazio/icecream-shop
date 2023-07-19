@@ -6,6 +6,11 @@ function UserContextProvider(props){
     const [verifiedUserInfo, setVerifiedUserInfo] = useState({});
     const [userCart, setUserCart] = useState([]);
     const [navOK, setNavOK] = useState(false);
+    const [reloadTrigger, setReloadTrigger] = useState(true);
+
+    function toggleReloadTrigger () {
+        setReloadTrigger(prev => !prev)
+    }
 
     function toggleNavOK () {
         setNavOK(prev => !prev)
@@ -30,7 +35,8 @@ function UserContextProvider(props){
             userCart,
             navOK,
             designateVUI,
-            toggleNavOK
+            toggleNavOK,
+            toggleReloadTrigger
         }}>
         {props.children}
         </UserContext.Provider>

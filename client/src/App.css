@@ -402,7 +402,7 @@ grid-template-areas:
 }
 
 .catitem-wrapper {
-    border: 2px solid red;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 8px;
     background-color: rgb(166, 190, 255);
     display: flex;
@@ -471,4 +471,12 @@ grid-template-areas:
 
 .category-title-wrapper {
     border: 2px solid black;
+}
+
+.no-go {
+    width: 100%;
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    background-color: rgb(37, 250, 90);
 }

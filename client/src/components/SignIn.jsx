@@ -46,7 +46,10 @@ export default function SignIn () {
     function handleAccountCreationSubmit (e) {
         e.preventDefault()
         axios.post('/api/users/', accountCreationInfo)
-            .then(res => designateVUI(res.data))
+            .then(res => {
+                designateVUI(res.data)
+                setUserID(res.data._id)
+            })
             .catch(err => console.log(err))
         setAccountCreationInfo(initialAccountCreationInfo)
     }
