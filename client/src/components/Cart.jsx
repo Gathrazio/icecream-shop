@@ -24,7 +24,7 @@ export default function Cart (props) {
             <hr />
             <div className="cart-total">
                 <div className="cart-total-text">
-                    Cart Total: <b className="bolded-total">${totalCost}</b> 
+                    Cart Total: <b className="bolded-total">${totalCost.toFixed(2)}</b> 
                 </div>
                 <button className="checkout-button">Checkout</button>
             </div>

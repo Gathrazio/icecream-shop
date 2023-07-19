@@ -30,6 +30,7 @@ export default function Item (props) {
         const updatedUsersArr = info.users.toSpliced(indexToRemove, 1)
         axios.put(`/api/items/${info._id}`, { users: updatedUsersArr })
             .then(res => console.log(res.data))
+            .then(() => window.location.reload())
     }
     return (
         <div className="item-wrapper">
