@@ -369,5 +369,10 @@ There are five main base URLs that this API routes, namely `/api/items`, `/api/c
 
 - Endpoint: `/api/ratings/recalculate/<itemID>`
 
+    - Method: GET
+    - Description: Recalculates the `globalRating` property of an item by its ID and returns the result as a JSON object with a `globalRating` property of type `Number`.
+
+- Endpoint: `/api/ratings/update/<itemID>?global=<someRating>`
+
     - Method: PUT
-    - Description: Recalculates the `globalRating` property of an item by its ID.
+    - Description: Updates `globalRating` property of an item by its ID via the `global` query. `<someRating>` should be one of the integers `1` through `5` or the integer `0`. The integer `0` corresponds to the item being globally unrated, and will update the item with a global rating of `null`.
