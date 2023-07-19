@@ -34,7 +34,6 @@ itemsRouter.route('/category/:category')
 itemsRouter.route('/category/:category/search') // ex, /api/items/cateogry/icecream/search?title=vanilla
     .get((req, res, next) => { // get all food items from a category that contain the characters in the title query
         const { title } = req.query;
-        console.log(title)
         const pattern = new RegExp(title);
         FoodItem.find({
             category: req.params.category,
@@ -63,7 +62,6 @@ itemsRouter.route('/:itemID')
             })
     })
     .get((req, res, next) => { // get one food item by its ID
-        console.log(req.params)
         FoodItem.findOne({ _id: req.params.itemID })
             .then(item => res.status(200).send(item))
             .catch(err => {

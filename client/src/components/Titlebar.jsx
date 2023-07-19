@@ -5,7 +5,7 @@ export default function Titlebar () {
         <div className="titlebar-wrapper">
             <div className="titlebar-leftside-wrapper">
                 <img src={logo} className="titlebar-logo"/>
-                <h1>The Icecream Zone</h1>
+                <h1 className="title">The Icecream Zone</h1>
             </div>
             <div className="titlebar-rightside-wrapper">
                 <h3>Incredible, peerless flavors!</h3>

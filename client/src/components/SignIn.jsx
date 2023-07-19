@@ -6,7 +6,8 @@ import Swal from 'sweetalert2'
 
 
 export default function SignIn () {
-    const { designateVUI } = useContext(UserContext);
+    const { designateVUI, navOK, toggleNavOK } = useContext(UserContext);
+    const [userID, setUserID] = useState('');
     const navigate = useNavigate();
     const initialAccountCreationInfo = {
         firstName: '',
@@ -21,6 +22,10 @@ export default function SignIn () {
     }
     const [accountCreationInfo, setAccountCreationInfo] = useState(initialAccountCreationInfo);
     const [signInInfo, setSignInInfo] = useState(initialSignInInfo);
+
+    useEffect(() => {
+        designateVUI({})
+    }, [])
 
     function handleAccountCreationChange (e) {
         const {name, value} = e.target;
@@ -43,13 +48,6 @@ export default function SignIn () {
         axios.post('/api/users/', accountCreationInfo)
             .then(res => designateVUI(res.data))
             .catch(err => console.log(err))
-        Swal.fire({
-            icon: "success",
-            title: "Account successfully created!",
-            text: "Browse our wares!",
-            confirmButtonText: "OK"
-        })
-        navigate('/navigation')
         setAccountCreationInfo(initialAccountCreationInfo)
     }
 
@@ -60,13 +58,7 @@ export default function SignIn () {
             .then(user => {
                 if (user) {
                     designateVUI(user)
-                    Swal.fire({
-                        icon: "success",
-                        title: "Successfully logged in!",
-                        text: "Browse our wares!",
-                        confirmButtonText: "OK"
-                    })
-                    navigate('/navigation')
+                    setUserID(user._id)
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -78,6 +70,20 @@ export default function SignIn () {
             })
             .catch(err => console.log(err))
     }
+
+    useEffect(() => {
+        if (navOK) {
+        Swal.fire({
+            icon: "success",
+            title: "Successfully logged in!",
+            text: "Browse our wares!",
+            confirmButtonText: "OK"
+        })
+        toggleNavOK()
+        navigate(`/navigation/${userID}`)
+    }
+    }, [navOK])
+    
 
     return (
         <div className="signin-wrapper main">

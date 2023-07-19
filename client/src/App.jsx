@@ -18,13 +18,11 @@ export default function App() {
             <Route 
                 path="/"
                 element={
-                  <UserContextProvider>
                     <SignIn />
-                  </UserContextProvider>
                 }
             />
             <Route 
-                path="/navigation"
+                path="/navigation/:userID"
                 element={<NavPage />}
             />
           </Routes>

@@ -4,22 +4,33 @@ const UserContext = createContext()
 
 function UserContextProvider(props){
     const [verifiedUserInfo, setVerifiedUserInfo] = useState({});
+    const [userCart, setUserCart] = useState([]);
+    const [navOK, setNavOK] = useState(false);
+
+    function toggleNavOK () {
+        setNavOK(prev => !prev)
+    }
     
 
     function designateVUI (userDoc) {
-        console.log("what we are setting verified user to: ", {...userDoc})
-        setVerifiedUserInfo("HELLO:LJODKHJFOISDHOFSD")
+        setVerifiedUserInfo(userDoc)
     }
 
     useEffect(() => {
-        console.log("verified user info changed")
-        console.log("verified user info that has changed: ", verifiedUserInfo)
-    }, [verifiedUserInfo])
+        if(verifiedUserInfo._id) {
+            axios.get(`/api/cart/${verifiedUserInfo._id}`)
+                .then(res => setUserCart(res.data))
+                .then(res => setNavOK(true))
+        }
+    }, [verifiedUserInfo._id])
 
     return(
         <UserContext.Provider value={{
             verifiedUserInfo,
-            designateVUI
+            userCart,
+            navOK,
+            designateVUI,
+            toggleNavOK
         }}>
         {props.children}
         </UserContext.Provider>
