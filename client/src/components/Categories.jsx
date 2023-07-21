@@ -13,21 +13,21 @@ export default function Categories ({userCart, updateUserCart, verifiedUserInfo}
             <div className="shake-wrapper ultimos" onClick={() => setNavTool(1)}>
                 <img src={strawberryShake} className="categories-image" />
                 <div className="category-focus">
-                    <h2>Shakes</h2>
+                    <h2 className="category-decide-title">Shakes</h2>
                     <span>Quenches thirst for at least one trillion years. That's right.</span>
                 </div>
             </div>
             <div className="icecream-wrapper ultimos" onClick={() => setNavTool(2)}>
                 <img src={icecreamCone} className="categories-image" />
                 <div className="category-focus">
-                    <h2>Icecream</h2>
+                    <h2 className="category-decide-title">Icecream</h2>
                     <span>Polar-fresh creamy nectar of the gods. Need we say more?</span>
                 </div>
             </div>
             <div className="sandwich-wrapper ultimos" onClick={() => setNavTool(3)}>
                 <img src={sub} className="categories-image cat-image-larger" />
                 <div className="category-focus">
-                    <h2>Sandwiches</h2>
+                    <h2 className="category-decide-title">Sandwiches</h2>
                     <span>Nutritious, delicious, and truly fulfilling in every conceivable way.</span>
                 </div>
             </div>

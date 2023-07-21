@@ -125,6 +125,7 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
                 />
                 <button className="signin-button">Create Account</button>
             </form>
+            <div className="signcreate-between">or</div>
             <form name="signin-form" className="signin-form" onSubmit={handleSignInSubmit}>
                 <input
                     className="sign-in-input"

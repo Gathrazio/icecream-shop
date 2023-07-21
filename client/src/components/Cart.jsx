@@ -29,7 +29,6 @@ export default function Cart ({verifiedUserInfo, userCart, updateUserCart}) {
             :
             <>
             {cartItemElements}
-            <hr />
             <div className="cart-total">
                 <div className="cart-total-text">
                     Cart Total: <b className="bolded-total">${totalCost.toFixed(2)}</b> 

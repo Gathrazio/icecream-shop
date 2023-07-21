@@ -16,14 +16,14 @@ const orderedItemSchema = new Schema({
         enum: [null, 1, 2, 3, 4, 5],
         required: true
     }
-}, { _id: false })
+}, { _id: false, })
 
 const orderSchema = new Schema({
     items: {
        type: [orderedItemSchema],
        required: true
     }
-})
+}, { timestamps: true })
 
 const userSchema = new Schema({
     firstName: {
@@ -46,6 +46,6 @@ const userSchema = new Schema({
         type: [orderSchema],
         required: true
     }
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model("User", userSchema);
