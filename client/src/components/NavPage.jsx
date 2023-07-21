@@ -35,7 +35,7 @@ export default function NavPage ({verifiedUserInfo, designateVUI}) {
                 <div className="in-cart-block-button-wrapper">
                     <button
                         type="button"
-                        className="signin-button in-cart-block"
+                        className="signin-button sign-out in-cart-block"
                         onClick={() => {
                             Swal.fire({
                                 icon: "success",
@@ -52,7 +52,6 @@ export default function NavPage ({verifiedUserInfo, designateVUI}) {
                 <div className="in-cart-block-button-wrapper">
                     <div className="cart-wrapper">
                         <h3 className="cart-title">{verifiedUserInfo.firstName}'s Cart</h3>
-                        <hr />
                         <Cart
                             verifiedUserInfo={verifiedUserInfo}
                             userCart={userCart}
