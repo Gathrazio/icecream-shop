@@ -21,12 +21,12 @@ export default function CatItem ({catItem, userCart, updateUserCart, verifiedUse
     }
 
     function handleSubmit (e) {
+        e.preventDefault()
         const writable = [...catItem.users];
         writable.push({
             userID: verifiedUserInfo._id,
             quantity: inputValue
         })
-        e.preventDefault()
         axios.put(`/api/items/${catItem._id}`, {
             users: writable
         })
@@ -34,6 +34,7 @@ export default function CatItem ({catItem, userCart, updateUserCart, verifiedUse
                 const pushableUserCart = [...userCart];
                 pushableUserCart.push(res.data)
                 updateUserCart(pushableUserCart, true)
+                setInputValue(1)
                 Swal.fire({
                     icon: "success",
                     title: "The item(s) have been added to your cart!",
