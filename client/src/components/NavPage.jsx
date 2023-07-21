@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
-export default function NavPage ({verifiedUserInfo}) {
+export default function NavPage ({verifiedUserInfo, designateVUI}) {
     const {userID} = useParams();
     const navigate = useNavigate();
 
@@ -42,6 +42,7 @@ export default function NavPage ({verifiedUserInfo}) {
                                 title: "Successfully signed out.",
                                 confirmButtonText: "OK"
                             })
+                            designateVUI({})
                             navigate('/')
                         }}
                     >
