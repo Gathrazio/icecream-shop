@@ -45,7 +45,6 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
                     text: "Please peruse our confections to your heart's content!",
                     confirmButtonText: "OK"
                 })
-                navigate(`/navigation/${verifiedUserInfo._id}`)
             })
             .catch(err => console.log(err))
         setAccountCreationInfo(initialAccountCreationInfo)
@@ -64,7 +63,6 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
                         text: "Please peruse our confections to your heart's content!",
                         confirmButtonText: "OK"
                     })
-                    navigate(`/navigation/${verifiedUserInfo._id}`)
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -76,6 +74,12 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
             })
             .catch(err => console.log(err))
     }
+
+    useEffect(() => {
+        if (verifiedUserInfo._id) {
+            navigate(`/navigation/${verifiedUserInfo._id}`)
+        }
+    }, [verifiedUserInfo])
     
 
     return (

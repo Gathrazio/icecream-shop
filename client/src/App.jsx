@@ -40,6 +40,7 @@ export default function App() {
               path="/navigation/:userID"
               element={
                 <NavPage
+                  designateVUI={designateVUI}
                   verifiedUserInfo={verifiedUserInfo}
                 />
               }
