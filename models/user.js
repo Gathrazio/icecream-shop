@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-const orderSchema = new Schema({
+const orderedItemSchema = new Schema({
     itemID: {
         type: Schema.Types.ObjectId,
         ref: "User",
@@ -13,8 +13,15 @@ const orderSchema = new Schema({
     }, 
     rating: {
         type: Schema.Types.Mixed,
-        enum: [undefined, 1, 2, 3, 4, 5],
+        enum: [null, 1, 2, 3, 4, 5],
         required: true
+    }
+}, { _id: false })
+
+const orderSchema = new Schema({
+    items: {
+       type: [orderedItemSchema],
+       required: true
     }
 })
 

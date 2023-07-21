@@ -15,6 +15,7 @@ app.use('/api/items', require('./routes/itemsRouter.js'))
 app.use('/api/cart', require('./routes/cartRouter.js'))
 app.use('/api/orders', require('./routes/ordersRouter.js'))
 app.use('/api/users', require('./routes/usersRouter.js'))
+app.use('/api/ratings', require('./routes/ratingsRouter.js'))
 
 app.use((err, req, res, next) => {
     return res.send({errMsg: err.message})
