@@ -1,17 +1,25 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Item from './sub-components/Item'
 
-export default function Cart (props) {
+export default function Cart ({verifiedUserInfo, userCart, updateUserCart}) {
     const [totalCost, setTotalCost] = useState(0);
+
     useEffect(() => {
-        if (props.currentUserCart.length != 0) {
-            setTotalCost(props.currentUserCart.reduce((currentTotal, item) => item.price * item.users[item.users.findIndex(lightUser => lightUser.userID === props.userID)].quantity + currentTotal, 0))
+        if (userCart.length != 0) {
+            setTotalCost(userCart.reduce((currentTotal, item) => item.price * item.users[item.users.findIndex(lightUser => lightUser.userID === verifiedUserInfo._id)].quantity + currentTotal, 0))
         }
-    }, [props.currentUserCart])
+    }, [userCart])
     
-    const cartItemElements = props.currentUserCart.map(item => {
-        const orderIndex = item.users.findIndex(lightUser => lightUser.userID === props.userID)
-        return <Item key={item._id} info={item} orderIndex={orderIndex} thisUser={props.currentUser} popItem={props.popItem} reloadUserCart={props.reloadUserCart} currentCart={props.currentUserCart}/>
+    const cartItemElements = userCart.map((item, itemIndex) => {
+        const orderIndex = item.users.findIndex(lightUser => lightUser.userID === verifiedUserInfo._id)
+        return <Item
+                    key={item._id}
+                    item={{...item, itemIndex}}
+                    orderIndex={orderIndex}
+                    verifiedUserInfo={verifiedUserInfo}
+                    userCart={userCart}
+                    updateUserCart={updateUserCart}
+                />
     })
     
     return (

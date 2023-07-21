@@ -2,7 +2,7 @@ import CategoryNav from './CategoryNav'
 import { useState, useEffect } from 'react'
 import CatItem from './CatItem'
 
-export default function Category (props) {
+export default function Category ({category, navReturn, userCart, updateUserCart, verifiedUserInfo}) {
 
     const [items, setItems] = useState([]);
     const [query, setQuery] = useState('');
@@ -13,20 +13,30 @@ export default function Category (props) {
 
     useEffect(() => {
         if (query) {
-            axios.get(`/api/items/category/${props.category.toLowerCase()}/search?title=${query}`)
+            axios.get(`/api/items/category/${category.toLowerCase()}/search?title=${query}`)
             .then(res => setItems(res.data))
         } else {
-            axios.get(`/api/items/category/${props.category.toLowerCase()}`)
+            axios.get(`/api/items/category/${category.toLowerCase()}`)
             .then(res => setItems(res.data))
         }
         
     }, [query])
 
-    const renderedItems = items.map(item => <CatItem key={item._id} itemInfo={item} addItem={props.addItem} />)
+    const renderedItems = items.map(catItem => <CatItem
+            key={catItem._id}
+            catItem={catItem}
+            userCart={userCart}
+            verifiedUserInfo={verifiedUserInfo}
+            updateUserCart={updateUserCart}
+        />)
 
     return (
         <div className="category-wrapper">
-            <CategoryNav category={props.category} navReturn={props.navReturn} updateQuery={updateQuery} />
+            <CategoryNav
+                category={category}
+                navReturn={navReturn}
+                updateQuery={updateQuery}
+            />
             <div className="itemcollection-wrapper content-bearing">
                 {renderedItems}
             </div>

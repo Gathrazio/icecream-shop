@@ -6,7 +6,8 @@ import realSandwich from '../assets/real-sandwich.png'
 import { useEffect, useState } from 'react'
 import sub from '../assets/sub.png'
 
-export default function Categories () {
+export default function Categories ({userCart, updateUserCart, verifiedUserInfo}) {
+
     const defaultView = (
         <div className="categories-wrapper">
             <div className="shake-wrapper ultimos" onClick={() => setNavTool(1)}>
@@ -44,13 +45,31 @@ export default function Categories () {
         if (navTool === 0) {
             setDisplayComponent(defaultView)
         } else if (navTool === 1) {
-            setDisplayComponent(<Category category="Shakes" navReturn={navReturn} />)
+            setDisplayComponent(<Category
+                category="Shakes"
+                navReturn={navReturn}
+                userCart={userCart}
+                updateUserCart={updateUserCart}
+                verifiedUserInfo={verifiedUserInfo}
+            />)
         } else if (navTool === 2) {
-            setDisplayComponent(<Category category="Icecream" navReturn={navReturn} />)
+            setDisplayComponent(<Category
+                category="Icecream"
+                navReturn={navReturn} 
+                userCart={userCart}
+                updateUserCart={updateUserCart}
+                verifiedUserInfo={verifiedUserInfo}
+            />)
         } else {
-            setDisplayComponent(<Category category="Sandwiches" navReturn={navReturn} />)
+            setDisplayComponent(<Category
+                category="Sandwiches"
+                navReturn={navReturn}
+                userCart={userCart}
+                updateUserCart={updateUserCart}
+                verifiedUserInfo={verifiedUserInfo}
+            />)
         }
-    }, [navTool])
+    }, [navTool, userCart])
 
     return (displayComponent)
 }

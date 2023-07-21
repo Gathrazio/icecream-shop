@@ -1,43 +1,69 @@
 import { useState } from 'react'
 
+    // props that <Item /> receives
+
+    // key={item._id}
+    // item={item}
+    // orderIndex={orderIndex}
+    // verifiedUserInfo={verifiedUserInfo}
+    // userCart={userCart}
+    // updateUserCart={updateUserCart}
+
 export default function Item (props) {
-    const info = props.info;
+    const thisItem = props.item;
+    const orderIndex = props.orderIndex;
+    const userCart = props.userCart;
+    const updateUserCart = props.updateUserCart;
+    const verifiedUserInfo = props.verifiedUserInfo;
+
     const [editToggle, setEditToggle] = useState(true);
-    const [currentQuantity, setCurrentQuantity] = useState(info.users[props.orderIndex].quantity)
+    const [currentQuantity, setCurrentQuantity] = useState(thisItem.users[orderIndex].quantity);
+
+    function removeItemFromCart () {
+        const cartIndex = userCart.findIndex(item => item._id === thisItem._id)
+        updateUserCart(userCart.toSpliced(cartIndex, 1), true)
+    }
+
     function handleSubmit (e) {
         e.preventDefault()
         setEditToggle(prev => !prev)
-        const updatedUsersArr = info.users.map(user => {
-            return user.userID === props.thisUser._id ? 
+
+        updateUserCart(userCart.toSpliced(thisItem.itemIndex, 1,
             {
-                userID: user.userID,
+                ...thisItem,
+                users: thisItem.users.toSpliced(thisItem.users.findIndex(user => user.userID === verifiedUserInfo._id), 1, {userID: verifiedUserInfo._id, quantity: currentQuantity})
+            }
+        ), true)
+        const updatedUsersArr = thisItem.users.map(user => {
+            return user.userID === verifiedUserInfo._id ? 
+            {
+                userID: verifiedUserInfo._id,
                 quantity: currentQuantity
             }
             :
             user
         })
-        axios.put(`/api/items/${info._id}`, { users: updatedUsersArr })
-            .then(res => props.reloadUserCart())
+        axios.put(`/api/items/${thisItem._id}`, { users: updatedUsersArr })
     }
+
     function handleQuantityInputChange (e) {
         const {value} = e.target;
         setCurrentQuantity(value)
     }
+
     function handleDelete (e) {
         e.preventDefault()
-        props.popItem(info._id)
-        const indexToRemove = info.users.findIndex(user => user.userID === props.thisUser._id);
-        const updatedUsersArr = info.users.toSpliced(indexToRemove, 1)
-        axios.put(`/api/items/${info._id}`, { users: updatedUsersArr })
-            .then(res => console.log(res.data))
-            .then(() => window.location.reload())
+        removeItemFromCart()
+        const updatedUsersArr = thisItem.users.toSpliced(orderIndex, 1)
+        axios.put(`/api/items/${thisItem._id}`, { users: updatedUsersArr })
     }
+    
     return (
         <div className="item-wrapper">
-            <h2 className="cart-item-title">{info.title}</h2>
+            <h2 className="cart-item-title">{thisItem.title}</h2>
             <div className="misc-info-wrapper">
                 <form name="item-edit-form" className="barabara" onSubmit={handleSubmit}>
-                    <div className="ppu">Price: ${info.price}</div>
+                    <div className="ppu">Price: ${thisItem.price}</div>
                     { editToggle ? 
                     <div className="quan">Quantity: {currentQuantity}</div>
                     :

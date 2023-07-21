@@ -1,14 +1,19 @@
-import { useState, useContext, useEffect } from 'react'
-import { UserContext } from '../userContext.jsx'
+import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
-export default function CatItem (props) {
+    // props for <CatItem />
+
+    // key={item._id}
+    // item={item}
+    // userCart={userCart}
+    // updateUserCart={updateUserCart}
+
+export default function CatItem ({catItem, userCart, updateUserCart, verifiedUserInfo}) {
+
+
     const [inputValue, setInputValue] = useState(1);
-    const location = useLocation()
-    const userID = location.pathname.slice(12);
-    const navigate = useNavigate();
 
     function handleChange (e) {
         const {value} = e.target;
@@ -16,36 +21,34 @@ export default function CatItem (props) {
     }
 
     function handleSubmit (e) {
-        const writable = [...props.itemInfo.users];
+        const writable = [...catItem.users];
         writable.push({
-            userID: userID,
+            userID: verifiedUserInfo._id,
             quantity: inputValue
         })
         e.preventDefault()
-        axios.put(`/api/items/${props.itemInfo._id}`, {
+        axios.put(`/api/items/${catItem._id}`, {
             users: writable
         })
-            .then(res => console.log(res.data))
             .then(res => {
+                const pushableUserCart = [...userCart];
+                pushableUserCart.push(res.data)
+                updateUserCart(pushableUserCart, true)
                 Swal.fire({
                     icon: "success",
                     title: "The item(s) have been added to your cart!",
                     confirmButtonText: "OK"
                 })
-                    .then(res => {
-                        if (res.isConfirmed) {
-                            window.location.reload()
-                        }
-                    })
             })
+            .catch(err => console.log(err))
     }
 
-    const displayToggle = props.itemInfo.users.findIndex(user => user.userID === userID) != -1;
+    const displayToggle = userCart.findIndex(item => item._id === catItem._id) != -1;
 
     return (
         <div className="catitem-wrapper">
-            <h3 className="catitem-title">{props.itemInfo.title}</h3>
-            <img src={props.itemInfo.imgUrl} className="catitem-image" />
+            <h3 className="catitem-title">{catItem.title}</h3>
+            <img src={catItem.imgUrl} className="catitem-image" />
             {!displayToggle ?
             <form className="catitem-input-button-wrapper" onSubmit={handleSubmit}>
                 <input type="Number" min="1" step="1" value={inputValue} onChange={handleChange} className="catitem-input" />
@@ -58,7 +61,7 @@ export default function CatItem (props) {
             
             }
             
-            <div className="catitem-ppi">Price per item: ${props.itemInfo.price}</div>
+            <div className="catitem-ppi">Price per item: ${catItem.price}</div>
         </div>
     )
 }

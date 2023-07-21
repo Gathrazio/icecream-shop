@@ -1,13 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { UserContext } from './userContext.jsx'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
-
-
-export default function SignIn () {
-    const { designateVUI, navOK, toggleNavOK } = useContext(UserContext);
-    const [userID, setUserID] = useState('');
+export default function SignIn ({verifiedUserInfo, designateVUI}) {
     const navigate = useNavigate();
     const initialAccountCreationInfo = {
         firstName: '',
@@ -22,10 +17,6 @@ export default function SignIn () {
     }
     const [accountCreationInfo, setAccountCreationInfo] = useState(initialAccountCreationInfo);
     const [signInInfo, setSignInInfo] = useState(initialSignInInfo);
-
-    useEffect(() => {
-        designateVUI({})
-    }, [])
 
     function handleAccountCreationChange (e) {
         const {name, value} = e.target;
@@ -48,7 +39,13 @@ export default function SignIn () {
         axios.post('/api/users/', accountCreationInfo)
             .then(res => {
                 designateVUI(res.data)
-                setUserID(res.data._id)
+                Swal.fire({
+                    icon: "success",
+                    title: "Your account has been successfully created and you are logged in!",
+                    text: "Please peruse our confections to your heart's content!",
+                    confirmButtonText: "OK"
+                })
+                navigate(`/navigation/${verifiedUserInfo._id}`)
             })
             .catch(err => console.log(err))
         setAccountCreationInfo(initialAccountCreationInfo)
@@ -61,7 +58,13 @@ export default function SignIn () {
             .then(user => {
                 if (user) {
                     designateVUI(user)
-                    setUserID(user._id)
+                    Swal.fire({
+                        icon: "success",
+                        title: "Successfully logged in!",
+                        text: "Please peruse our confections to your heart's content!",
+                        confirmButtonText: "OK"
+                    })
+                    navigate(`/navigation/${verifiedUserInfo._id}`)
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -73,19 +76,6 @@ export default function SignIn () {
             })
             .catch(err => console.log(err))
     }
-
-    useEffect(() => {
-        if (navOK) {
-        Swal.fire({
-            icon: "success",
-            title: "Successfully logged in!",
-            text: "Browse our wares!",
-            confirmButtonText: "OK"
-        })
-        toggleNavOK()
-        navigate(`/navigation/${userID}`)
-    }
-    }, [navOK])
     
 
     return (

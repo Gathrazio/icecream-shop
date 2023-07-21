@@ -1,7 +1,7 @@
 import leftArrow from '../../assets/left-arrow.png'
 import { useState } from 'react'
 
-export default function CategoryNav (props) {
+export default function CategoryNav ({category, navReturn, updateQuery}) {
 
     const [searchField, setSearchField] = useState('');
 
@@ -12,24 +12,24 @@ export default function CategoryNav (props) {
 
     function handleSubmit (e) {
         e.preventDefault()
-        props.updateQuery(searchField)
+        updateQuery(searchField)
     }
     let catPlaceholder = 'strawberry';
-    if (props.category === 'Icecream') {
-        catPlaceholder = 'vanilla bean';
-    } else if (props.category === 'Sandwiches') {
-        catPlaceholder = 'spicy sausage';
+    if (category === 'Icecream') {
+        catPlaceholder = 'vanilla';
+    } else if (category === 'Sandwiches') {
+        catPlaceholder = 'spicy';
     }
     return (
         <>
             <div className="category-title-wrapper">
-                <h2>{props.category}</h2>
+                <h2>{category}</h2>
             </div>
             <div className="categorynav-wrapper">
-                <img className="cat-nav-back" src={leftArrow} onClick={() => props.navReturn()} />
+                <img className="cat-nav-back" src={leftArrow} onClick={() => navReturn()} />
                 <form name="search-form" className="search-form" onSubmit={handleSubmit}>
                     <input type="text" className="searchbar" value={searchField} onChange={handleChange} placeholder={catPlaceholder} />
-                    <button className="searchbar-button">Launch</button>
+                    <button className="searchbar-button">Search</button>
                 </form>
                 
             </div>
