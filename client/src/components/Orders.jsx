@@ -30,9 +30,17 @@ export default function Orders ({verifiedUserInfo, designateVUI, updateOrdersChi
                     <h2>Orders</h2>
                 </div>
             </div>
+            {orderElements.length === 0 ? 
+            <div className="orders-block-message">
+                You have no previous orders.
+            </div>
+            :
             <div className="orders-block content-bearing">
                 {orderElements}
             </div>
+            }
+            
+            
         </div>
     )
 }

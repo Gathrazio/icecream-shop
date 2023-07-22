@@ -412,8 +412,15 @@ grid-template-areas:
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
 }
 
-.orders-block {
+.orders-block, .orders-block-message {
     height: calc(76vh - 40px);
+}
+
+.orders-block-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
 }
 
 .order-wrapper {
