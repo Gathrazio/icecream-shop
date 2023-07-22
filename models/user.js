@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-const orderedItemSchema = new Schema({
-    itemID: {
+const lightweightUserSchema = new Schema({
+    userID: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true
@@ -10,10 +10,41 @@ const orderedItemSchema = new Schema({
     quantity: {
         type: Number,
         required: true
-    }, 
-    rating: {
+    }
+}, { _id: false })
+
+const orderedItemSchema = new Schema({
+    _id: {
+        type: Schema.Types.ObjectId,
+        required: true
+    },
+    __v: {
+        type: Number
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    imgUrl: {
+        type: String,
+        required: true
+    },
+    category: {
+        type: String,
+        enum: ['icecream', 'shakes', 'sandwiches'],
+        required: true
+    },
+    globalRating: {
         type: Schema.Types.Mixed,
         enum: [null, 1, 2, 3, 4, 5],
+        required: true
+    },
+    users: {
+        type: [lightweightUserSchema],
         required: true
     }
 }, { _id: false, })

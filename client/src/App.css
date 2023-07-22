@@ -86,11 +86,12 @@
     color: rgb(96, 96, 96);
 }
 
-.account-creation-input, .sign-in-input, .signin-button, .checkout-button {
+.account-creation-input, .sign-in-input, .signin-button, .checkout-button, .order-details {
     padding: 15px;
     font-size: 1.3rem;
     border: none;
     border-radius: 8px;
+    transition: 0.1s;
     margin: 5px;
 }
 
@@ -99,7 +100,7 @@
     flex-direction: column;
 }
 
-.signin-button:hover, .item-button:hover, .checkout-button:hover {
+.signin-button:hover, .item-button:hover, .checkout-button:hover, .order-details:hover {
     cursor: pointer;
     background-color: rgb(155, 155, 155);
     color: white;
@@ -168,6 +169,8 @@
     justify-content: space-around;
     height: calc(6vh + 40px);
     margin: 20px;
+    box-shadow: none;
+    transition: 0.2s;
     padding: 5px 10px 5px 10px;
 }
 
@@ -181,6 +184,7 @@
     border-radius: 8px;
     width: calc(100% - 40px);
     display: flex;
+    margin-top: 20px;
     flex-direction: column;
     align-items: center;
     margin-bottom: 10px;
@@ -216,7 +220,6 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
 }
 
 .item-button {
@@ -300,6 +303,7 @@ input::-webkit-inner-spin-button {
 
 ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
   }
   
 ::-webkit-scrollbar-track {
@@ -317,11 +321,11 @@ input::-webkit-inner-spin-button {
 }
 
 .sign-out {
-    height: calc(6vh);
-    margin-bottom: 10px;
-    margin-top: 20px;
+    height: calc(6vh + 30px);
+    margin-bottom: 5px;
+    margin-top: 5px;
     font-size: 1.3rem;
-    width: calc(100% - 40px);
+    width: calc(100% - 20px);
 }
 
 
@@ -384,6 +388,7 @@ grid-template-areas:
 
 .categories-image {
     height: 180px;
+    transition: 0.1s;
 }
 
 .category-wrapper {
@@ -407,13 +412,88 @@ grid-template-areas:
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
 }
 
+.orders-block {
+    height: calc(76vh - 40px);
+}
+
+.order-wrapper {
+    margin: 20px;
+    margin-top: 40px;
+}
+
+.order-blurb-wrapper {
+    height: calc(6vh + 20px);
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    border-radius: 8px 8px 0px 0px;
+    background-color: #ef9393;
+}
+
+.order-details-wrapper {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    border-radius: 0px 0px 8px 8px;
+    background-color: #f4a472;
+}
+
+.order-title {
+    width: 100%;
+}
+
+.order-info-text-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.order-info-text {
+    font-size: 1.3rem;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.order-details {
+    margin-left: 10px;
+    font-size: 1.1rem;
+    width: 150px;
+}
+
 .cat-nav-back {
     height: calc(6vh + 40px);
     margin-right: -80px;
     z-index: 9999999;
+    transition: 0.1s;
 }
 
-.cat-nav-back:hover {
+.orders-title {
+    position: absolute;
+    width: 100%;
+    font-size: 1.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-title {
+    font-size: 1rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.order-nav-back {
+    height: calc(6vh + 40px);
+    z-index: 99999;
+    transition: 0.1s;
+}
+
+.cat-nav-back:hover, .order-nav-back:hover {
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.437);
     transition: 0.1s;
@@ -434,6 +514,7 @@ grid-template-areas:
     width: 150px;
     font-size: 1.2rem;
     border-radius: 8px;
+    transition: 0.1s;
     border: none;
 }
 
@@ -463,6 +544,8 @@ grid-template-areas:
     min-width: 250px;
     max-width: 500px;
     height: 350px;
+    box-shadow: none;
+    transition: 0.2s;
     overflow: hidden;
 }
 
@@ -475,6 +558,7 @@ grid-template-areas:
 }
 
 .catitem-wrapper:hover, .item-wrapper:hover {
+    transition: 0.1s;
     box-shadow: 10px 10px 5px rgb(85, 85, 85);
 }
 
@@ -536,4 +620,10 @@ grid-template-areas:
     padding: 5px;
     justify-content: center;
     background-color: rgb(37, 250, 90);
+}
+
+.order-item-wrapper-h {
+    flex: 0 0 auto;
+    width: 300px;
+    height: 350px;
 }

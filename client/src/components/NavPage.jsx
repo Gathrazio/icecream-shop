@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Cart from './Cart'
 import Categories from './Categories'
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom'
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import axios from 'axios';
+import { set } from 'mongoose';
 
-export default function NavPage ({verifiedUserInfo, designateVUI}) {
+export default function NavPage ({verifiedUserInfo, designateVUI, toggleChime}) {
     const {userID} = useParams();
+    const location = useLocation();
     const navigate = useNavigate();
 
     const [userCart, setUserCart] = useState([]);
@@ -22,11 +24,13 @@ export default function NavPage ({verifiedUserInfo, designateVUI}) {
     }
 
     useEffect(() => {
-            axios.get(`/api/cart/${verifiedUserInfo._id}`)
-                .then(res => {
-                    return setUserCart(res.data)
-                })
-        }, [])
+        if (location.pathname.includes('navigation') && verifiedUserInfo._id != userID) {
+            axios.get(`/api/users/${userID}`)
+                .then(res => designateVUI(res.data))
+        }
+        axios.get(`/api/cart/${userID}`)
+            .then(res => setUserCart(res.data))
+    }, [verifiedUserInfo._id])
 
 
     return (
@@ -43,19 +47,27 @@ export default function NavPage ({verifiedUserInfo, designateVUI}) {
                                 confirmButtonText: "OK"
                             })
                             designateVUI({})
+                            console.log('just set vui to empty object')
                             navigate('/')
                         }}
                     >
                         Sign Out
                     </button>
+                    
+                </div>
+                <div className="in-cart-block-button-wrapper">
+                    <button className="signin-button sign-out in-cart-block" onClick={() => navigate('orders')}>
+                        View Previous Orders
+                    </button>
                 </div>
                 <div className="in-cart-block-button-wrapper">
                     <div className="cart-wrapper">
-                        <h3 className="cart-title">{verifiedUserInfo.firstName}'s Cart</h3>
+                        <span className="cart-title">{verifiedUserInfo.firstName}'s Cart</span>
                         <Cart
                             verifiedUserInfo={verifiedUserInfo}
                             userCart={userCart}
                             updateUserCart={updateUserCart}
+                            toggleChime={toggleChime}
                         />
                     </div>
                 </div>
