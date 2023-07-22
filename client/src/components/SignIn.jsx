@@ -15,6 +15,8 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
         username: '',
         password: ''
     }
+
+    console.log("in signin, verifieduserinfo: ", verifiedUserInfo)
     
     const [accountCreationInfo, setAccountCreationInfo] = useState(initialAccountCreationInfo);
     const [signInInfo, setSignInInfo] = useState(initialSignInInfo);

@@ -1,4 +1,4 @@
-import logo from '../assets/icecream-logo.svg'
+import logo from '../assets/icecream-logo.png'
 
 export default function Titlebar () {
     return (

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react'
+import Orders from './components/Orders'
 import SignIn from './components/SignIn'
 import Titlebar from './components/Titlebar'
 import Footer from './components/Footer'
@@ -9,10 +10,16 @@ import './App.css'
 
 export default function App() {
     const [verifiedUserInfo, setVerifiedUserInfo] = useState({});
+    const [updateOrdersChime, setUpdateOrdersChime] = useState(true);
+
+    function toggleChime () {
+      setUpdateOrdersChime(prev => !prev)
+    }
 
     function designateVUI (userDoc) {
         setVerifiedUserInfo(userDoc)
     }
+
 
     // verifiedUserInfo,
     // userCart,
@@ -40,6 +47,17 @@ export default function App() {
               path="/navigation/:userID"
               element={
                 <NavPage
+                  toggleChime={toggleChime}
+                  designateVUI={designateVUI}
+                  verifiedUserInfo={verifiedUserInfo}
+                />
+              }
+            />
+            <Route 
+              path="/navigation/:userID/orders"
+              element={
+                <Orders
+                  updateOrdersChime={updateOrdersChime}
                   designateVUI={designateVUI}
                   verifiedUserInfo={verifiedUserInfo}
                 />

@@ -15,14 +15,9 @@ ordersRouter.route('/user/:userID')
     .post((req, res, next) => { // post a new order to a user consisting of the user's current cart and, if successful, clears the user's cart of items
         FoodItem.find({ 'users.userID': req.params.userID })
             .then(userCart => {
-                const formattedCart = userCart.map(item => ({
-                    itemID: item._id,
-                    quantity: item.users.find(user => user.userID == req.params.userID).quantity,
-                    rating: null
-                }));
                 User.findOneAndUpdate(
                     { _id: req.params.userID },
-                    { $push: { orders: { items: formattedCart } } },
+                    { $push: { orders: { items: userCart } } },
                     { new: true }
                 )
                     .then(updatedUser => {
@@ -38,9 +33,8 @@ ordersRouter.route('/user/:userID')
                             .then(updatedItem => {
                                 if (toggle[0]) { // to avoid sending multiple responses
                                     toggle[0] = false;
-                                    return res.status(201).send("Successfully posted the order and cleared the user's cart!")
+                                    return res.status(201).send(userCart)
                                 }
-                                
                             })
                             .catch(err => {
                                 res.status(500)

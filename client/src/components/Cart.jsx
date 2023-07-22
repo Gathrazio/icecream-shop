@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
 import Item from './sub-components/Item'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-export default function Cart ({verifiedUserInfo, userCart, updateUserCart}) {
+export default function Cart ({verifiedUserInfo, userCart, updateUserCart, toggleChime}) {
     const [totalCost, setTotalCost] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (userCart.length != 0) {
@@ -21,6 +24,14 @@ export default function Cart ({verifiedUserInfo, userCart, updateUserCart}) {
                     updateUserCart={updateUserCart}
                 />
     })
+
+    function handleCheckout () {
+        axios.post(`/api/orders/user/${verifiedUserInfo._id}`)
+        .then(res => {
+            toggleChime()
+            navigate('orders')
+        })
+    }
     
     return (
         <div className="interior-cart-wrapper">
@@ -33,7 +44,7 @@ export default function Cart ({verifiedUserInfo, userCart, updateUserCart}) {
                 <div className="cart-total-text">
                     Cart Total: <b className="bolded-total">${totalCost.toFixed(2)}</b> 
                 </div>
-                <button className="checkout-button">Checkout</button>
+                <button className="checkout-button" onClick={handleCheckout}>Checkout</button>
             </div>
             </>
             }
