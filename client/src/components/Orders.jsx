@@ -20,8 +20,7 @@ export default function Orders ({verifiedUserInfo, designateVUI, updateOrdersChi
 
     useEffect(() => {
         if (location.pathname.includes('navigation') && verifiedUserInfo._id != userID) {
-            userAxios.get(`/api/protected/users/orders`)
-                .then(res => designateVUI(res.data))
+            designateVUI(JSON.parse(localStorage.getItem('user')))
         }
         userAxios.get(`/api/protected/orders/user`)
             .then(res => setOrders(res.data))
