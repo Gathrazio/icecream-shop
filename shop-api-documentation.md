@@ -523,6 +523,8 @@ The routes in this section are mostly for database management purposes, and are 
 
 #### `/api/protected/ratings`
 
+These routes are fully functional but not yet implemented into the frontend app. Rating functionality may be implemented in the future.
+
 - Endpoint: `/api/protected/ratings/rate/<itemID>/<userID>?index=<someOrderIndex>&rating=<someRating>/`
 
     - Method: PUT
