@@ -86,7 +86,7 @@
     color: rgb(96, 96, 96);
 }
 
-.account-creation-input, .sign-in-input, .signin-button, .checkout-button, .order-details {
+.account-creation-input, .sign-in-input, .signin-button, .checkout-button, .order-details, .toggle {
     padding: 15px;
     font-size: 1.3rem;
     border: none;
@@ -100,7 +100,7 @@
     flex-direction: column;
 }
 
-.signin-button:hover, .item-button:hover, .checkout-button:hover, .order-details:hover {
+.signin-button:hover, .item-button:hover, .checkout-button:hover, .order-details:hover, .toggle:hover {
     cursor: pointer;
     background-color: rgb(155, 155, 155);
     color: white;

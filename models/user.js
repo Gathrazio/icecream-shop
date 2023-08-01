@@ -57,14 +57,6 @@ const orderSchema = new Schema({
 }, { timestamps: true })
 
 const userSchema = new Schema({
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type: String,
-        required: true
-    },
     username: {
         type: String,
         required: true
