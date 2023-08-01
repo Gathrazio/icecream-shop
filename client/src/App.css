@@ -780,6 +780,16 @@ grid-template-areas:
         font-size: 1rem;
     }
 
+    .cart-total-text {
+        font-size: 1.1rem;
+        justify-content: center;
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-left: 5px;
+    }
+    .bolded-total{
+        font-size: 1.1rem;
+    }
     .item-wrapper {
         height: 210px;
     }
