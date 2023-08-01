@@ -435,27 +435,27 @@ There are six main base URLs that this API routes, namely `/api/auth`, `/api/ite
     - Description: Posts a new food item. Must send a JSON body that satisfies the item schema.
 
 
-- Endpoint: `/api/items/category/<someCategory>`
+- Endpoint: `/api/items/category/<someCategory>/`
     - Method: GET
     - Description: Retrieves an array of all items from category `<someCategory>`. `<someCategory>` must be one of the following three strings: 'icecream', 'shakes', or 'sandwiches'.
 
 
-- Endpoint: `/api/items/category/<someCategory>/search?title=<someLetters>`
+- Endpoint: `/api/items/category/<someCategory>/search?title=<someLetters>/`
     - Method: GET
     - Description: Retrieves an array of all items from category `<someCategory>` that have `title` properties which contain each letter within `<someLetters>`. This is a basic regex search.
 
 
-- Endpoint: `/api/items/<itemID>`
+- Endpoint: `/api/items/<itemID>/`
     - Method: GET
     - Description: Retrieves a specific item document by its `_id` property.
 
 
-- Endpoint: `/api/items/<itemID>`
+- Endpoint: `/api/items/<itemID>/`
     - Method: PUT
     - Description: Updates a specific item document by its `_id` property. Must send an update object in JSON. Properties in the update object that are not in the item schema will be ignored.
 
 
-- Endpoint: `/api/items/<itemID>`
+- Endpoint: `/api/items/<itemID>/`
     - Method: DELETE
     - Description: Deletes a specific item document by its `_id` property.  
 
@@ -463,7 +463,7 @@ There are six main base URLs that this API routes, namely `/api/auth`, `/api/ite
 
 <p>&nbsp;</p>
 
-#### `/api/protected/cart`  
+#### `/api/protected/cart`
 
 
 - Endpoint: `/api/protected/cart/`
@@ -493,6 +493,7 @@ There are six main base URLs that this API routes, namely `/api/auth`, `/api/ite
 
 #### `/api/protected/users`
 
+The routes in this section are mostly for database management purposes, and are protected to make it harder for an outside entity to manipulate.
 
 - Endpoint: `/api/protected/users/`
     - Method: GET
