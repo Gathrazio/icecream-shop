@@ -4,6 +4,14 @@ import Order from './sub-components/Order'
 import axios from 'axios'
 import leftArrow from '../assets/left-arrow.png'
 
+const userAxios = axios.create();
+
+userAxios.interceptors.request.use(config => {
+    const token = localStorage.getItem("token");
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+})
+
 export default function Orders ({verifiedUserInfo, designateVUI, updateOrdersChime}) {
     const {userID} = useParams();
     const location = useLocation();
@@ -12,10 +20,10 @@ export default function Orders ({verifiedUserInfo, designateVUI, updateOrdersChi
 
     useEffect(() => {
         if (location.pathname.includes('navigation') && verifiedUserInfo._id != userID) {
-            axios.get(`/api/users/${userID}`)
+            userAxios.get(`/api/protected/users/orders`)
                 .then(res => designateVUI(res.data))
         }
-        axios.get(`/api/orders/user/${userID}`)
+        userAxios.get(`/api/protected/orders/user`)
             .then(res => setOrders(res.data))
     }, [verifiedUserInfo._id])
 

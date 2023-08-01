@@ -3,9 +3,9 @@ const ordersRouter = express.Router();
 const FoodItem = require('../models/item.js');
 const User = require('../models/user');
 
-ordersRouter.route('/user/:userID')
+ordersRouter.route('/user/')
     .get((req, res, next) => { // get all orders corresponding to a user
-        User.findOne({ _id: req.params.userID })
+        User.findOne({ _id: req.auth._id })
             .then(foundUser => res.status(200).send(foundUser.orders))
             .catch(err => {
                 res.status(500)
@@ -13,10 +13,10 @@ ordersRouter.route('/user/:userID')
             })
     })
     .post((req, res, next) => { // post a new order to a user consisting of the user's current cart and, if successful, clears the user's cart of items
-        FoodItem.find({ 'users.userID': req.params.userID })
+        FoodItem.find({ 'users.userID': req.auth._id })
             .then(userCart => {
                 User.findOneAndUpdate(
-                    { _id: req.params.userID },
+                    { _id: req.auth._id },
                     { $push: { orders: { items: userCart } } },
                     { new: true }
                 )
@@ -24,9 +24,9 @@ ordersRouter.route('/user/:userID')
                         const toggle = [true];
                         const cartSieve = [...userCart];
                         for (i = 0; i < userCart.length; i++) {
-                            cartSieve[i].users.splice(cartSieve[i].users.indexOf(user => user.userID === req.params.userID), 1)
+                            cartSieve[i].users.splice(cartSieve[i].users.indexOf(user => user.userID === req.auth._id), 1)
                             FoodItem.findOneAndUpdate( // clearing user's cart
-                                { 'users.userID': req.params.userID },
+                                { 'users.userID': req.auth._id },
                                 { users: cartSieve[i].users },
                                 { new: true }
                             )

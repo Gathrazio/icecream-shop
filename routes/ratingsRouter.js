@@ -43,15 +43,15 @@ ratingsRouter.route('/update/:itemID')
         })
     })
 
-ratingsRouter.route('/rate/:itemID/:userID/')
+ratingsRouter.route('/rate/:itemID')
     .put((req, res, next) => { // rates an item in a user's cart
-        User.findOne({ _id: req.params.userID })
+        User.findOne({ _id: req.auth._id })
             .then(foundUser => {
                 const itemIndex = foundUser.orders[Number(req.query.index)].items.findIndex(item => item.itemID.valueOf() === req.params.itemID);
                 const editableUser = {...foundUser};
                 editableUser._doc.orders[Number(req.query.index)].items[itemIndex].rating = Number(req.query.rating) === 0 ? null : Number(req.query.rating);
                 User.findOneAndUpdate(
-                    { _id: req.params.userID },
+                    { _id: req.auth._id },
                     { orders: editableUser._doc.orders },
                     { new: true }
                 )

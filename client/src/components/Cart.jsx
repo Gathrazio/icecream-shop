@@ -3,6 +3,14 @@ import Item from './sub-components/Item'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const userAxios = axios.create();
+
+userAxios.interceptors.request.use(config => {
+    const token = localStorage.getItem("token");
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+})
+
 export default function Cart ({verifiedUserInfo, userCart, updateUserCart, toggleChime}) {
     const [totalCost, setTotalCost] = useState(0);
     const navigate = useNavigate();
@@ -26,7 +34,7 @@ export default function Cart ({verifiedUserInfo, userCart, updateUserCart, toggl
     })
 
     function handleCheckout () {
-        axios.post(`/api/orders/user/${verifiedUserInfo._id}`)
+        userAxios.post(`/api/protected/orders/user`)
         .then(res => {
             toggleChime()
             navigate('orders')

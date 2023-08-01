@@ -1,7 +1,6 @@
 
 export default function ViewOnlyOrderItem ({item, verifiedUserInfo}) {
     // const thisItem = await item;
-    console.log(item.users)
     const quantity = item.users.find(user => user.userID === verifiedUserInfo._id).quantity;
     return (
         <div className="catitem-wrapper order-item-wrapper-h">

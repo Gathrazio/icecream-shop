@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const path = require('path');
+const { expressjwt: jwt } = require('express-jwt');
 require('dotenv').config()
 
 app.use(express.json())
@@ -11,11 +13,15 @@ mongoose.set('strictQuery', true)
 mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log('connected to shopdb'))
 
+app.use(express.static(path.join(__dirname, 'client', 'dist')))
 app.use('/api/items', require('./routes/itemsRouter.js'))
-app.use('/api/cart', require('./routes/cartRouter.js'))
-app.use('/api/orders', require('./routes/ordersRouter.js'))
-app.use('/api/users', require('./routes/usersRouter.js'))
-app.use('/api/ratings', require('./routes/ratingsRouter.js'))
+
+app.use('/api/auth', require('./routes/authRouter.js'))
+app.use('/api/protected', jwt({ secret: process.env.USER_SECRET, algorithms: ['HS256'] }))
+app.use('/api/protected/cart', require('./routes/cartRouter.js'))
+app.use('/api/protected/orders', require('./routes/ordersRouter.js'))
+app.use('/api/protected/users/orders', require('./routes/usersRouter.js'))
+app.use('/api/protected/ratings', require('./routes/ratingsRouter.js'))
 
 app.use((err, req, res, next) => {
     return res.send({errMsg: err.message})

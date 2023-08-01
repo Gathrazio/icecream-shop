@@ -6,6 +6,14 @@ import Swal from 'sweetalert2'
 import axios from 'axios';
 import { set } from 'mongoose';
 
+const userAxios = axios.create();
+
+userAxios.interceptors.request.use(config => {
+    const token = localStorage.getItem("token");
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+})
+
 export default function NavPage ({verifiedUserInfo, designateVUI, toggleChime}) {
     const {userID} = useParams();
     const location = useLocation();
@@ -25,10 +33,10 @@ export default function NavPage ({verifiedUserInfo, designateVUI, toggleChime}) 
 
     useEffect(() => {
         if (location.pathname.includes('navigation') && verifiedUserInfo._id != userID) {
-            axios.get(`/api/users/${userID}`)
+            userAxios.get(`/api/protected/users/orders/${userID}`)
                 .then(res => designateVUI(res.data))
         }
-        axios.get(`/api/cart/${userID}`)
+        userAxios.get(`/api/protected/cart`)
             .then(res => setUserCart(res.data))
     }, [verifiedUserInfo._id])
 
@@ -47,7 +55,8 @@ export default function NavPage ({verifiedUserInfo, designateVUI, toggleChime}) 
                                 confirmButtonText: "OK"
                             })
                             designateVUI({})
-                            console.log('just set vui to empty object')
+                            localStorage.removeItem('user')
+                            localStorage.removeItem('token')
                             navigate('/')
                         }}
                     >
@@ -62,7 +71,7 @@ export default function NavPage ({verifiedUserInfo, designateVUI, toggleChime}) 
                 </div>
                 <div className="in-cart-block-button-wrapper">
                     <div className="cart-wrapper">
-                        <span className="cart-title">{verifiedUserInfo.firstName}'s Cart</span>
+                        <span className="cart-title">{verifiedUserInfo.username}'s Cart</span>
                         <Cart
                             verifiedUserInfo={verifiedUserInfo}
                             userCart={userCart}

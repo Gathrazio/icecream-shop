@@ -107,14 +107,9 @@
     transition: .1s;
 }
 
-@media screen and (max-height: 1000px) {
-    .signin-wrapper {
-        flex-direction: row;
-    }
-
-    .signcreate-between {
-        margin: 0px 50px 0px 50px;
-    }
+.toggle {
+    font-size: 1rem;
+    padding: 8px;
 }
 
 /* NavPage */

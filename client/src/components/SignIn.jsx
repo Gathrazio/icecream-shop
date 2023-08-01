@@ -22,9 +22,12 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
     function handleInputSubmit (e) {
         e.preventDefault()
         if (signUpLoginToggle) {
-            axios.post('/api/users/', info)
+            axios.post('/api/auth/signup', info)
                 .then(res => {
-                    designateVUI(res.data)
+                    designateVUI(res.data.user)
+                    console.log('res.data', res.data)
+                    localStorage.setItem('token', res.data.token)
+                    localStorage.setItem('user', JSON.stringify(res.data.user))
                     Swal.fire({
                         icon: "success",
                         title: "Your account has been successfully created and you are logged in!",
@@ -32,29 +35,33 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
                         confirmButtonText: "OK"
                     })
                 })
-            .catch(err => console.log(err))
-        } else {
-            axios.get('/api/users')
-                .then(res => res.data.find(user => user.username === signInInfo.username && user.password === signInInfo.password))
-                .then(user => {
-                    if (user) {
-                        designateVUI(user)
-                        Swal.fire({
-                            icon: "success",
-                            title: "Successfully logged in!",
-                            text: "Please peruse our confections to your heart's content!",
-                            confirmButtonText: "OK"
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Username or password is incorrect.",
-                            text: "Please try again.",
-                            confirmButtonText: "OK"
-                        })
-                    }
+                .catch(err => {
+                    Swal.fire({
+                        icon: "error",
+                        title: err.response.data.errMsg,
+                        confirmButtonText: "OK"
+                    })
                 })
-                .catch(err => console.log(err))
+        } else {
+            axios.post('/api/auth/login', info)
+                .then(res => {
+                    designateVUI(res.data.user)
+                    localStorage.setItem('token', res.data.token)
+                    localStorage.setItem('user', JSON.stringify(res.data.user))
+                    Swal.fire({
+                        icon: "success",
+                        title: "You are logged in!",
+                        text: "Please peruse our confections to your heart's content!",
+                        confirmButtonText: "OK"
+                    })
+                })
+                .catch(err => {
+                    Swal.fire({
+                        icon: "error",
+                        title: err.response.data.errMsg,
+                        confirmButtonText: "OK"
+                    })
+                })
         }
 
     }
@@ -89,7 +96,7 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
                 />
                 <button className="signin-button">{signUpLoginToggle ? 'Create Account' : 'Sign In'}</button>
             </form>
-            <button className="toggle">{signUpLoginToggle ? 'Already have an account?' : `Don't have an account?`}</button>
+            <button className="toggle" onClick={() => setSignUpLoginToggle(prev => !prev)}>{signUpLoginToggle ? 'Already have an account?' : `Don't have an account?`}</button>
         </div>
     )
 }
