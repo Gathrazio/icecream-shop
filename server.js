@@ -20,7 +20,7 @@ app.use('/api/auth', require('./routes/authRouter.js'))
 app.use('/api/protected', jwt({ secret: process.env.USER_SECRET, algorithms: ['HS256'] }))
 app.use('/api/protected/cart', require('./routes/cartRouter.js'))
 app.use('/api/protected/orders', require('./routes/ordersRouter.js'))
-app.use('/api/protected/users/orders', require('./routes/usersRouter.js'))
+app.use('/api/protected/users', require('./routes/usersRouter.js'))
 app.use('/api/protected/ratings', require('./routes/ratingsRouter.js'))
 
 app.use((err, req, res, next) => {
