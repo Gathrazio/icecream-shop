@@ -1,6 +1,7 @@
 # Overview
 
-This shop API allows the frontend app to make various database queries, including CRUD operations for the users and items collections and other unique operations.
+This shop API allows the frontend app to make various database queries, including CRUD operations for the users and items collections and other unique operations. This API utilizes jwt token user authentication wherein a user's password is encrypted before it is stored in the database and the user's password is not returned to the frontend after login/signup.
+
 <p>&nbsp;</p>
 
 ## Database Collections
