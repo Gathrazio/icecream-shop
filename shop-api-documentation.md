@@ -167,7 +167,7 @@ An example user document is also below:
         {
         "_id": "64b3455f2f4f5a5d7097fb95",
         "username": "nancy_pie",
-        "password": "rainbows456",
+        "password": "$2b$10$uCP8HmXEmRimexsn8dL1KeDXK0TaaYWLSG0mFJRCLI1wvhkRlL2za",
         "orders": [
             {
                 "items": [
