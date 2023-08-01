@@ -33,13 +33,15 @@ export default function CatItem ({catItem, userCart, updateUserCart, verifiedUse
                 pushableUserCart.push(res.data)
                 updateUserCart(pushableUserCart, true)
                 setInputValue(1)
-                Swal.fire({
+                { window.innerWidth > '500' &&
+                    
+                    Swal.fire({
                     icon: "success",
                     title: "The item(s) have been added to your cart!",
                     confirmButtonText: "OK",
-                    width: '350px',
+                    width: '320px',
                     position: 'center'
-                })
+                })}
             })
             .catch(err => console.log(err))
     }

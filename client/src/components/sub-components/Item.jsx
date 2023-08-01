@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
     // props that <Item /> receives
 
@@ -17,7 +17,11 @@ export default function Item (props) {
     const verifiedUserInfo = props.verifiedUserInfo;
 
     const [editToggle, setEditToggle] = useState(true);
-    const [currentQuantity, setCurrentQuantity] = useState(thisItem.users[orderIndex].quantity);
+    const [currentQuantity, setCurrentQuantity] = useState(1);
+
+    useEffect(() => {
+        setCurrentQuantity(thisItem.users[orderIndex].quantity)
+    }, [userCart])
 
     function removeItemFromCart () {
         const cartIndex = userCart.findIndex(item => item._id === thisItem._id)

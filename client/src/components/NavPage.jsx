@@ -33,8 +33,7 @@ export default function NavPage ({verifiedUserInfo, designateVUI, toggleChime, s
 
     useEffect(() => {
         if (location.pathname.includes('navigation') && verifiedUserInfo._id != userID) {
-            userAxios.get(`/api/protected/users/orders/${userID}`)
-                .then(res => designateVUI(res.data))
+            designateVUI(JSON.parse(localStorage.getItem('user')))
         }
         userAxios.get(`/api/protected/cart`)
             .then(res => setUserCart(res.data))
@@ -53,7 +52,7 @@ export default function NavPage ({verifiedUserInfo, designateVUI, toggleChime, s
                                 icon: "success",
                                 title: "Successfully signed out.",
                                 confirmButtonText: "OK",
-                                width: '350px',
+                                width: '320px',
                                 position: 'center'
                             })
                             designateVUI({})

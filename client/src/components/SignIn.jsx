@@ -25,7 +25,6 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
             axios.post('/api/auth/signup', info)
                 .then(res => {
                     designateVUI(res.data.user)
-                    console.log('res.data', res.data)
                     localStorage.setItem('token', res.data.token)
                     localStorage.setItem('user', JSON.stringify(res.data.user))
                     Swal.fire({
@@ -33,7 +32,7 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
                         title: "Your account has been successfully created and you are logged in!",
                         text: "Please peruse our confections to your heart's content!",
                         confirmButtonText: "OK",
-                        width: '350px',
+                        width: '320px',
                         position: 'center'
                     })
                 })
@@ -42,7 +41,7 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
                         icon: "error",
                         title: err.response.data.errMsg,
                         confirmButtonText: "OK",
-                        width: '350px',
+                        width: '320px',
                         position: 'center'
                     })
                 })
@@ -57,7 +56,7 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
                         title: "You are logged in!",
                         text: "Please peruse our confections to your heart's content!",
                         confirmButtonText: "OK",
-                        width: '350px',
+                        width: '320px',
                         position: 'center'
                     })
                 })
@@ -66,7 +65,7 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
                         icon: "error",
                         title: err.response.data.errMsg,
                         confirmButtonText: "OK",
-                        width: '350px',
+                        width: '320px',
                         position: 'center'
                     })
                 })
