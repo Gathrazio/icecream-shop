@@ -55,7 +55,7 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
 
     function handleSignInSubmit (e) {
         e.preventDefault()
-        axios.get('/api/users/')
+        axios.get('/api/users')
             .then(res => res.data.find(user => user.username === signInInfo.username && user.password === signInInfo.password))
             .then(user => {
                 if (user) {
