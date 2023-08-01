@@ -11,11 +11,16 @@
 
 .main {
     height: 82vh;
-    background-color: bisque;
+    background-color: rgb(255, 206, 145);
 }
 
 .main .content-bearing {
     overflow-y: scroll;
+}
+
+.main-modified {
+    height: 82vh;
+    background-color: rgb(255, 206, 145);
 }
 
 /* Titlebar */
@@ -53,6 +58,7 @@
 
 .footer-wrapper {
     height: 8vh;
+    z-index: 999999;
     background-color: rgb(122, 227, 227);
     display: flex;
     justify-content: space-around;
@@ -117,7 +123,7 @@
 .navpage-wrapper {
     display: grid;
     width: 100%;
-    grid-template-columns: 1fr 2.5fr;
+    grid-template-columns: 1fr 1.8fr;
     grid-template-rows: 1fr;
     grid-template-areas:
         "cs-bar" "cc-block";
@@ -133,6 +139,10 @@
     font-size: 2rem;
 }
 
+.small-message {
+    display: none;
+}
+
 .cart-total {
     display: flex;
     justify-content: space-around;
@@ -146,9 +156,7 @@
 .cart-signout-bar {
     grid-area: "cs-bar";
     background-color: rgb(255, 206, 145);
-    resize: horizontal;
-    min-width: 100%;
-    max-width: 850px;
+    min-width: 100%
 }
 
 .item-button-wrapper {
@@ -358,8 +366,8 @@ grid-template-areas:
     background-color: rgb(203, 203, 203);
     border-radius: 8px;
     text-align: center;
-    margin: 50px;
-    padding: 50px;
+    margin: 30px;
+    padding: 40px;
 }
 
 .ultimos {
@@ -409,6 +417,7 @@ grid-template-areas:
 
 .orders-block, .orders-block-message {
     height: calc(76vh - 40px);
+    overflow-y: scroll;
 }
 
 .orders-block-message {
@@ -455,6 +464,19 @@ grid-template-areas:
 }
 
 .order-info-text {
+    font-size: 1.3rem;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.order-info-text-thin {
+    display: none;
+    font-size: 1.3rem;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.order-info-text-wide {
     font-size: 1.3rem;
     margin-left: 20px;
     margin-right: 20px;
@@ -628,4 +650,138 @@ grid-template-areas:
     flex: 0 0 auto;
     width: 300px;
     height: 350px;
+}
+
+@media only screen and (max-width: 1100px) {
+    .titlebar-rightside-wrapper {
+        display: none;
+    }
+    .title {
+        font-size: 1.5rem;
+    }
+    .titlebar-logo {
+        margin-left: 0px;
+        margin-right: 5px;
+    }
+    .titlebar-wrapper {
+        justify-content: center;
+    }
+    .signin-form {
+        width: 300px;
+    }
+    .footer-wrapper {
+        display: none;
+    }
+    .main {
+        height: 90vh;
+        overflow-y: scroll;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .navpage-wrapper {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 2.5fr;
+        grid-template-areas:
+        "cs-bar"
+        "cc-block";
+    }
+    .categories-wrapper {
+        height: 100vh;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "shw"
+            "iw"
+            "sw";
+    }
+    .category-wrapper {
+        height: 90vh;
+    }
+    .main {
+        height: 90vh;
+        overflow-y: scroll;
+    }
+    .footer-wrapper {
+        display: none;
+    }
+    .ultimos {
+        height: 500px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .ultimos:hover {
+        cursor: pointer;
+        background-color: #feffa8;
+        transition: 0.1s;
+    }
+    
+    .itemcollection-wrapper {
+        height: calc(78vh - 80px);
+        bottom: 0;
+    }
+
+    .searchbar {
+        width: 200px;
+    }
+    .searchbar-button {
+        width: 80px;
+    }
+    .order-details {
+        height: 50px;
+        padding: 2px;
+    }
+    .empty-cart-message {
+        display: none;
+    }
+    .small-message {
+        display: block;
+        margin: 50px 0px 50px 0px;
+        text-align: center;
+    }
+    .order-info-text-wide {
+        display: none;
+    }
+    .order-info-text-thin {
+        display: inline;
+    }
+    .orders-block {
+        height: calc(84vh - 40px);
+        overflow-y: scroll;
+    }
+    .orders-wrapper {
+        height: 90vh;
+    }
+    .cart-signout-bar {
+        height: 90vh;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+
+    .barabara {
+        height: 130px;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px; 
+    }
+    .searchbar {
+        width: 100px;
+    }
+    .misc-info-wrapper {
+        height: 130px;
+    }
+    .cart-item-title {
+        margin-top: 10px;
+    }
+
+    .order-info-text-thin, .order-info-text {
+        font-size: 1rem;
+    }
+
+    .item-wrapper {
+        height: 210px;
+    }
+
 }

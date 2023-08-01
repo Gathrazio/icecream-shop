@@ -36,7 +36,9 @@ export default function CatItem ({catItem, userCart, updateUserCart, verifiedUse
                 Swal.fire({
                     icon: "success",
                     title: "The item(s) have been added to your cart!",
-                    confirmButtonText: "OK"
+                    confirmButtonText: "OK",
+                    width: '350px',
+                    position: 'center'
                 })
             })
             .catch(err => console.log(err))

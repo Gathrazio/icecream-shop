@@ -31,7 +31,7 @@ export default function Orders ({verifiedUserInfo, designateVUI, updateOrdersChi
 
     
     return (
-        <div className="orders-wrapper main">
+        <div className="orders-wrapper main-modified">
             <div className="categorynav-wrapper">
                 <img className="order-nav-back" src={leftArrow} onClick={() => navigate(-1)}/>
                 <div className="orders-title">

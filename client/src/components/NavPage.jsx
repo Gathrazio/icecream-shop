@@ -14,7 +14,7 @@ userAxios.interceptors.request.use(config => {
     return config;
 })
 
-export default function NavPage ({verifiedUserInfo, designateVUI, toggleChime}) {
+export default function NavPage ({verifiedUserInfo, designateVUI, toggleChime, scrollDown}) {
     const {userID} = useParams();
     const location = useLocation();
     const navigate = useNavigate();
@@ -52,7 +52,9 @@ export default function NavPage ({verifiedUserInfo, designateVUI, toggleChime}) 
                             Swal.fire({
                                 icon: "success",
                                 title: "Successfully signed out.",
-                                confirmButtonText: "OK"
+                                confirmButtonText: "OK",
+                                width: '350px',
+                                position: 'center'
                             })
                             designateVUI({})
                             localStorage.removeItem('user')
@@ -87,6 +89,7 @@ export default function NavPage ({verifiedUserInfo, designateVUI, toggleChime}) 
                     userCart={userCart}
                     verifiedUserInfo={verifiedUserInfo}
                     updateUserCart={updateUserCart}
+                    scrollDown={scrollDown}
                 />
             </div>
         </div>

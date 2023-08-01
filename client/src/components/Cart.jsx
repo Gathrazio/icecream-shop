@@ -44,7 +44,10 @@ export default function Cart ({verifiedUserInfo, userCart, updateUserCart, toggl
     return (
         <div className="interior-cart-wrapper">
             {cartItemElements.length === 0 ?
+            <>
             <div className="empty-cart-message">Cart is empty.</div>
+            <div className="empty-cart-message small-message">Cart is empty. Scroll down to browse!</div>
+            </>
             :
             <>
             {cartItemElements}

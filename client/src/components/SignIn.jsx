@@ -32,14 +32,18 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
                         icon: "success",
                         title: "Your account has been successfully created and you are logged in!",
                         text: "Please peruse our confections to your heart's content!",
-                        confirmButtonText: "OK"
+                        confirmButtonText: "OK",
+                        width: '350px',
+                        position: 'center'
                     })
                 })
                 .catch(err => {
                     Swal.fire({
                         icon: "error",
                         title: err.response.data.errMsg,
-                        confirmButtonText: "OK"
+                        confirmButtonText: "OK",
+                        width: '350px',
+                        position: 'center'
                     })
                 })
         } else {
@@ -52,14 +56,18 @@ export default function SignIn ({verifiedUserInfo, designateVUI}) {
                         icon: "success",
                         title: "You are logged in!",
                         text: "Please peruse our confections to your heart's content!",
-                        confirmButtonText: "OK"
+                        confirmButtonText: "OK",
+                        width: '350px',
+                        position: 'center'
                     })
                 })
                 .catch(err => {
                     Swal.fire({
                         icon: "error",
                         title: err.response.data.errMsg,
-                        confirmButtonText: "OK"
+                        confirmButtonText: "OK",
+                        width: '350px',
+                        position: 'center'
                     })
                 })
         }

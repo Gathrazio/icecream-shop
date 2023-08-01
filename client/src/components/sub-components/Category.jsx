@@ -2,7 +2,7 @@ import CategoryNav from './CategoryNav'
 import { useState, useEffect } from 'react'
 import CatItem from './CatItem'
 
-export default function Category ({category, navReturn, userCart, updateUserCart, verifiedUserInfo}) {
+export default function Category ({category, navReturn, userCart, updateUserCart, verifiedUserInfo, scrollToPart, categoryWrapperRef}) {
 
     const [items, setItems] = useState([]);
     const [query, setQuery] = useState('');

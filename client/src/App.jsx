@@ -5,12 +5,17 @@ import SignIn from './components/SignIn'
 import Titlebar from './components/Titlebar'
 import Footer from './components/Footer'
 import NavPage from './components/NavPage'
+import { useRef } from 'react'
 import './App.css'
 
 
 export default function App() {
     const [verifiedUserInfo, setVerifiedUserInfo] = useState({});
     const [updateOrdersChime, setUpdateOrdersChime] = useState(true);
+
+    const scrollDown = () => {
+      document.getElementsByClassName('navpage-wrapper')[0].scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+    }
 
     function toggleChime () {
       setUpdateOrdersChime(prev => !prev)
@@ -50,6 +55,7 @@ export default function App() {
                   toggleChime={toggleChime}
                   designateVUI={designateVUI}
                   verifiedUserInfo={verifiedUserInfo}
+                  scrollDown={scrollDown}
                 />
               }
             />
