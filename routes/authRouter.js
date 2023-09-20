@@ -10,7 +10,7 @@ authRouter.post('/signup', (req, res, next) => {
                 res.status(403)
                 return next(new Error('Username is already taken.'));
             }
-            const newUser = new User(req.body);
+            const newUser = new User({...req.body, username: req.body.username.toLowerCase()});
             newUser.save()
                 .then(savedUser => {
                     const token = jwt.sign(savedUser.withoutPassword(), process.env.USER_SECRET);
